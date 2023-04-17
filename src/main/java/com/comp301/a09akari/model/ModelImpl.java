@@ -42,7 +42,14 @@ public class ModelImpl implements Model {
         if (getActivePuzzle().getCellType(r, c) != CellType.CORRIDOR) {
             throw new IllegalArgumentException();
         }
-        // how do u remove a lamp...
+        if (lamps.containsKey(r) && lamps.get(r).contains(c)) {
+            if (lamps.get(r).size() == 1) {
+                lamps.remove(r);
+            } else {
+                int temp = lamps.get(r).indexOf(c);
+                lamps.get(r).remove(temp);
+            }
+        }
     }
 
     @Override
