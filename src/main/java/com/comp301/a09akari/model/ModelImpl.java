@@ -25,7 +25,11 @@ public class ModelImpl implements Model {
         if (getActivePuzzle().getCellType(r, c) != CellType.CORRIDOR) {
             throw new IllegalArgumentException();
         }
-        if (!lamps.containsKey(r) || !lamps.get(r).contains(c)) {
+        if (!lamps.containsKey(r)) {
+            ArrayList<Integer> temp = new ArrayList<Integer>();
+            temp.add(c);
+            lamps.put(r, temp);
+        } else if (!lamps.get(r).contains(c)) {
             lamps.get(r).add(c);
         }
     }
