@@ -11,6 +11,7 @@ public class ModelImpl implements Model {
     private int index;
     private Map<Integer, ArrayList<Integer>> lamps;
     // not sure how else to keep track of lamp locations
+    // List<List<Integer>> ?
     private List<ModelObserver> observers;
     public ModelImpl(PuzzleLibrary library) {
         this.library = library;
@@ -26,12 +27,12 @@ public class ModelImpl implements Model {
         if (getActivePuzzle().getCellType(r, c) != CellType.CORRIDOR) {
             throw new IllegalArgumentException();
         }
-        if (!lamps.containsKey(r)) {
+        if (!lamps.containsKey(c)) {
             ArrayList<Integer> temp = new ArrayList<Integer>();
-            temp.add(c);
-            lamps.put(r, temp);
-        } else if (!lamps.get(r).contains(c)) {
-            lamps.get(r).add(c);
+            temp.add(r);
+            lamps.put(c, temp);
+        } else if (!lamps.get(c).contains(r)) {
+            lamps.get(c).add(r);
         }
     }
 
