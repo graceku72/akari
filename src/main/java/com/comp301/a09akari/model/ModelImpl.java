@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ModelImpl implements Model {
+    // unsure abt where to notify observers (mentioned in readme)
     private PuzzleLibrary library;
     private int index;
     private Map<Integer, ArrayList<Integer>> lamps;
