@@ -46,20 +46,20 @@ public class ModelImpl implements Model {
 
     @Override
     public void removeLamp(int r, int c) {
-        if (r < 0 || r >= getActivePuzzle().getWidth() || c < 0 || c >= getActivePuzzle().getHeight()) {
-            throw new IndexOutOfBoundsException();
-        }
-        if (getActivePuzzle().getCellType(r, c) != CellType.CORRIDOR) {
-            throw new IllegalArgumentException();
-        }
-        if (lamps.containsKey(r) && lamps.get(r).contains(c)) {
-            if (lamps.get(r).size() == 1) {
-                lamps.remove(r);
-            } else {
-                int temp = lamps.get(r).indexOf(c);
-                lamps.get(r).remove(temp);
-            }
-        }
+//        if (r < 0 || r >= getActivePuzzle().getWidth() || c < 0 || c >= getActivePuzzle().getHeight()) {
+//            throw new IndexOutOfBoundsException();
+//        }
+//        if (getActivePuzzle().getCellType(r, c) != CellType.CORRIDOR) {
+//            throw new IllegalArgumentException();
+//        }
+//        if (lamps.containsKey(r) && lamps.get(r).contains(c)) {
+//            if (lamps.get(r).size() == 1) {
+//                lamps.remove(r);
+//            } else {
+//                int temp = lamps.get(r).indexOf(c);
+//                lamps.get(r).remove(temp);
+//            }
+//        }
     }
 
     @Override
