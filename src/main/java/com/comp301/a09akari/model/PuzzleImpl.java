@@ -18,7 +18,7 @@ public class PuzzleImpl implements Puzzle {
 
     @Override
     public CellType getCellType(int r, int c) {
-        if (r < 0 || r >= getWidth() || c < 0 || c >= getHeight()) {
+        if (r < 0 || r >= getHeight() || c < 0 || c >= getWidth()) {
             throw new IndexOutOfBoundsException();
         }
         if (board[r][c] == 0) {
@@ -44,7 +44,7 @@ public class PuzzleImpl implements Puzzle {
 
     @Override
     public int getClue(int r, int c) {
-        if (r < 0 || r >= getWidth() || c < 0 || c >= getHeight()) {
+        if (r < 0 || r >= getHeight() || c < 0 || c >= getWidth()) {
             throw new IndexOutOfBoundsException();
         }
         if (getCellType(r, c) != CellType.CLUE) {

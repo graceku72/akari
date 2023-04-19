@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ModelImpl implements Model {
-    // unsure abt where to notify observers (mentioned in readme)
     private PuzzleLibrary library;
     private int index;
     private int[][] lamps;
@@ -14,12 +13,12 @@ public class ModelImpl implements Model {
     public ModelImpl(PuzzleLibrary library) {
         this.library = library;
         index = 0;
-        lamps = new int[getActivePuzzle().getWidth()][getActivePuzzle().getHeight()];
+        lamps = new int[this.library.getPuzzle(index).getWidth()][this.library.getPuzzle(index).getHeight()];
     }
 
     @Override
     public void addLamp(int r, int c) {
-        if (r < 0 || r >= getActivePuzzle().getWidth() || c < 0 || c >= getActivePuzzle().getHeight()) {
+        if (r < 0 || r >= getActivePuzzle().getHeight() || c < 0 || c >= getActivePuzzle().getWidth()) {
             throw new IndexOutOfBoundsException();
         }
         if (getActivePuzzle().getCellType(r, c) != CellType.CORRIDOR) {
@@ -27,20 +26,20 @@ public class ModelImpl implements Model {
         }
         if (lamps[r][c] != 1) {
             lamps[r][c] = 1;
-//            int i = 0;
-//            while (i < getActivePuzzle().getHeight()) {
-//                if (i != c) {
-//                    lamps[r][i] = 2;
-//                }
-//                i++;
-//            }
-//            i = 0;
-//            while (i < getActivePuzzle().getWidth()) {
-//                if (i != r) {
-//                    lamps[i][c] = 2;
-//                }
-//                i++;
-//            }
+            int i = 0;
+            while (i < getActivePuzzle().getHeight()) {
+                if (i != c && getActivePuzzle().getCellType(r, i) != CellType.WALL && getActivePuzzle().getCellType(r, i) != CellType.CLUE) {
+                    lamps[r][i] = 2;
+                }
+                i++;
+            }
+            i = 0;
+            while (i < getActivePuzzle().getWidth()) {
+                if (i != r && getActivePuzzle().getCellType(r, i) != CellType.WALL && getActivePuzzle().getCellType(r, i) != CellType.CLUE) {
+                    lamps[i][c] = 2;
+                }
+                i++;
+            }
         }
     }
 
@@ -103,6 +102,7 @@ public class ModelImpl implements Model {
             throw new IndexOutOfBoundsException();
         }
         this.index = index;
+        lamps = new int[library.getPuzzle(index).getWidth()][library.getPuzzle(index).getHeight()];
     }
 
     @Override
