@@ -41,7 +41,8 @@ public class ModelImpl implements Model {
                 }
                 if (i != c) {
                     lamps[r][i] = 2;
-                }            }
+                }
+            }
             for (int i = r; i >= 0; i--) {
                 if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
                     break;
