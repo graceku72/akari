@@ -14,6 +14,7 @@ public class ModelImpl implements Model {
         this.library = library;
         index = 0;
         lamps = new int[this.library.getPuzzle(index).getWidth()][this.library.getPuzzle(index).getHeight()];
+        // set all vals in lamps to 0 ?
     }
 
     @Override
@@ -26,26 +27,43 @@ public class ModelImpl implements Model {
         }
         if (lamps[r][c] != 1) {
             lamps[r][c] = 1;
-            int i = 0;
-            while (i < getActivePuzzle().getHeight()) {
-                if (i != c && getActivePuzzle().getCellType(r, i) != CellType.WALL && getActivePuzzle().getCellType(r, i) != CellType.CLUE) {
+            for (int i = c; i >= 0; i--) {
+                if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
+                    break;
+                }
+                if (i != c) {
                     lamps[r][i] = 2;
                 }
-                i++;
             }
-            i = 0;
-            while (i < getActivePuzzle().getWidth()) {
-                if (i != r && getActivePuzzle().getCellType(r, i) != CellType.WALL && getActivePuzzle().getCellType(r, i) != CellType.CLUE) {
+            for (int i = c; i < getActivePuzzle().getWidth(); i++) {
+                if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
+                    break;
+                }
+                if (i != c) {
+                    lamps[r][i] = 2;
+                }            }
+            for (int i = r; i >= 0; i--) {
+                if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
+                    break;
+                }
+                if (i != r) {
                     lamps[i][c] = 2;
                 }
-                i++;
+            }
+            for (int i = r; i < getActivePuzzle().getHeight(); i++) {
+                if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
+                    break;
+                }
+                if (i != r) {
+                    lamps[i][c] = 2;
+                }
             }
         }
     }
 
     @Override
     public void removeLamp(int r, int c) {
-        if (r < 0 || r >= getActivePuzzle().getWidth() || c < 0 || c >= getActivePuzzle().getHeight()) {
+        if (r < 0 || r >= getActivePuzzle().getHeight() || c < 0 || c >= getActivePuzzle().getWidth()) {
             throw new IndexOutOfBoundsException();
         }
         if (getActivePuzzle().getCellType(r, c) != CellType.CORRIDOR) {
@@ -53,35 +71,105 @@ public class ModelImpl implements Model {
         }
         if (lamps[r][c] == 1) {
             lamps[r][c] = 0;
+            for (int i = c; i >= 0; i--) {
+                if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
+                    break;
+                }
+                if (i != c) {
+                    lamps[r][i] = 0;
+                }
+            }
+            for (int i = c; i < getActivePuzzle().getWidth(); i++) {
+                if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
+                    break;
+                }
+                if (i != c) {
+                    lamps[r][i] = 0;
+                }
+            }
+            for (int i = r; i >= 0; i--) {
+                if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
+                    break;
+                }
+                if (i != r) {
+                    lamps[i][c] = 0;
+                }
+            }
+            for (int i = r; i < getActivePuzzle().getHeight(); i++) {
+                if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
+                    break;
+                }
+                if (i != r) {
+                    lamps[i][c] = 0;
+                }
+            }
         }
     }
 
     @Override
     public boolean isLit(int r, int c) {
-        if (r < 0 || r >= getActivePuzzle().getWidth() || c < 0 || c >= getActivePuzzle().getHeight()) {
+        if (r < 0 || r >= getActivePuzzle().getHeight() || c < 0 || c >= getActivePuzzle().getWidth()) {
             throw new IndexOutOfBoundsException();
         }
         if (getActivePuzzle().getCellType(r, c) != CellType.CORRIDOR) {
             throw new IllegalArgumentException();
+        }
+        if (lamps[r][c] == 1 || lamps[r][c] == 2) {
+            return true;
         }
         return false;
     }
 
     @Override
     public boolean isLamp(int r, int c) {
-        if (r < 0 || r >= getActivePuzzle().getWidth() || c < 0 || c >= getActivePuzzle().getHeight()) {
+        if (r < 0 || r >= getActivePuzzle().getHeight() || c < 0 || c >= getActivePuzzle().getWidth()) {
             throw new IndexOutOfBoundsException();
         }
         if (getActivePuzzle().getCellType(r, c) != CellType.CORRIDOR) {
             throw new IllegalArgumentException();
+        }
+        if (lamps[r][c] == 1) {
+            return true;
         }
         return false;
     }
 
     @Override
     public boolean isLampIllegal(int r, int c) {
-        if (r < 0 || r >= getActivePuzzle().getWidth() || c < 0 || c >= getActivePuzzle().getHeight()) {
+        if (r < 0 || r >= getActivePuzzle().getHeight() || c < 0 || c >= getActivePuzzle().getWidth()) {
             throw new IndexOutOfBoundsException();
+        }
+        for (int i = c; i >= 0; i--) {
+            if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
+                break;
+            }
+            if (i != c && lamps[r][i] == 1) {
+                return true;
+            }
+        }
+        for (int i = c; i < getActivePuzzle().getWidth(); i++) {
+            if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
+                break;
+            }
+            if (i != c && lamps[r][i] == 1) {
+                return true;
+            }
+        }
+        for (int i = r; i >= 0; i--) {
+            if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
+                break;
+            }
+            if (i != r && lamps[i][c] == 1) {
+                return true;
+            }
+        }
+        for (int i = r; i < getActivePuzzle().getHeight(); i++) {
+            if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
+                break;
+            }
+            if (i != r && lamps[i][c] == 1) {
+                return true;
+            }
         }
         return false;
     }
@@ -103,6 +191,7 @@ public class ModelImpl implements Model {
         }
         this.index = index;
         lamps = new int[library.getPuzzle(index).getWidth()][library.getPuzzle(index).getHeight()];
+        // r u supposed to change dimensions for lamps here?
     }
 
     @Override
@@ -112,7 +201,11 @@ public class ModelImpl implements Model {
 
     @Override
     public void resetPuzzle() {
-        // how do u remove lamps
+        for (int i = 0; i < getActivePuzzle().getHeight(); i++) {
+            for (int j = 0; j < getActivePuzzle().getWidth(); j++) {
+                lamps[i][j] = 0;
+            }
+        }
     }
 
     @Override
@@ -122,10 +215,10 @@ public class ModelImpl implements Model {
 
     @Override
     public boolean isClueSatisfied(int r, int c) {
-        if (r < 0 || r >= getActivePuzzle().getWidth() || c < 0 || c >= getActivePuzzle().getHeight()) {
+        if (r < 0 || r >= getActivePuzzle().getHeight() || c < 0 || c >= getActivePuzzle().getWidth()) {
             throw new IndexOutOfBoundsException();
         }
-        if (getActivePuzzle().getCellType(r, c) != CellType.CLUE) {
+        if (getActivePuzzle().getCellType(r, c) != CellType.CORRIDOR) {
             throw new IllegalArgumentException();
         }
         return false;
