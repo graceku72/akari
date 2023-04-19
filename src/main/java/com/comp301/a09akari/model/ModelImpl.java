@@ -27,39 +27,34 @@ public class ModelImpl implements Model {
         }
         if (lamps[r][c] != 1) {
             lamps[r][c] = 1;
-            int i = 0;
-            while (i < getActivePuzzle().getHeight()) {
-                if (i != c) {
-                    lamps[r][i] = 2;
-                }
-                i++;
-            }
-            i = 0;
-            while (i < getActivePuzzle().getWidth()) {
-                if (i != r) {
-                    lamps[i][c] = 2;
-                }
-                i++;
-            }
+//            int i = 0;
+//            while (i < getActivePuzzle().getHeight()) {
+//                if (i != c) {
+//                    lamps[r][i] = 2;
+//                }
+//                i++;
+//            }
+//            i = 0;
+//            while (i < getActivePuzzle().getWidth()) {
+//                if (i != r) {
+//                    lamps[i][c] = 2;
+//                }
+//                i++;
+//            }
         }
     }
 
     @Override
     public void removeLamp(int r, int c) {
-//        if (r < 0 || r >= getActivePuzzle().getWidth() || c < 0 || c >= getActivePuzzle().getHeight()) {
-//            throw new IndexOutOfBoundsException();
-//        }
-//        if (getActivePuzzle().getCellType(r, c) != CellType.CORRIDOR) {
-//            throw new IllegalArgumentException();
-//        }
-//        if (lamps.containsKey(r) && lamps.get(r).contains(c)) {
-//            if (lamps.get(r).size() == 1) {
-//                lamps.remove(r);
-//            } else {
-//                int temp = lamps.get(r).indexOf(c);
-//                lamps.get(r).remove(temp);
-//            }
-//        }
+        if (r < 0 || r >= getActivePuzzle().getWidth() || c < 0 || c >= getActivePuzzle().getHeight()) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (getActivePuzzle().getCellType(r, c) != CellType.CORRIDOR) {
+            throw new IllegalArgumentException();
+        }
+        if (lamps[r][c] == 1) {
+            lamps[r][c] = 0;
+        }
     }
 
     @Override
