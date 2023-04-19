@@ -9,14 +9,12 @@ public class ModelImpl implements Model {
     // unsure abt where to notify observers (mentioned in readme)
     private PuzzleLibrary library;
     private int index;
-    private Map<Integer, ArrayList<Integer>> lamps;
-    // not sure how else to keep track of lamp locations
-    // List<List<Integer>> ?
+    private int[][] lamps;
     private List<ModelObserver> observers;
     public ModelImpl(PuzzleLibrary library) {
         this.library = library;
         index = 0;
-        lamps = new HashMap<Integer, ArrayList<Integer>>();
+        lamps = new int[getActivePuzzle().getWidth()][getActivePuzzle().getHeight()];
     }
 
     @Override
@@ -27,12 +25,22 @@ public class ModelImpl implements Model {
         if (getActivePuzzle().getCellType(r, c) != CellType.CORRIDOR) {
             throw new IllegalArgumentException();
         }
-        if (!lamps.containsKey(c)) {
-            ArrayList<Integer> temp = new ArrayList<Integer>();
-            temp.add(r);
-            lamps.put(c, temp);
-        } else if (!lamps.get(c).contains(r)) {
-            lamps.get(c).add(r);
+        if (lamps[r][c] != 1) {
+            lamps[r][c] = 1;
+            int i = 0;
+            while (i < getActivePuzzle().getHeight()) {
+                if (i != c) {
+                    lamps[r][i] = 2;
+                }
+                i++;
+            }
+            i = 0;
+            while (i < getActivePuzzle().getWidth()) {
+                if (i != r) {
+                    lamps[i][c] = 2;
+                }
+                i++;
+            }
         }
     }
 
