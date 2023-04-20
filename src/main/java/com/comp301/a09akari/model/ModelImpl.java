@@ -106,28 +106,28 @@ public class ModelImpl implements Model {
         for (int i = c; i >= 0; i--) {
             if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
                 break;
-            } else if (isLamp(r, i)) {
+            } else if (i != c && isLamp(r, i)) {
                 return true;
             }
         }
         for (int i = c; i < getActivePuzzle().getWidth(); i++) {
             if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
                 break;
-            } else if (isLamp(r, i)) {
+            } else if (i != c && isLamp(r, i)) {
                 return true;
             }
         }
         for (int i = r; i >= 0; i--) {
             if (getActivePuzzle().getCellType(i, c) == CellType.WALL || getActivePuzzle().getCellType(i, c) == CellType.CLUE) {
                 break;
-            } else if (isLamp(i, c)) {
+            } else if (i != r && isLamp(i, c)) {
                 return true;
             }
         }
         for (int i = r; i < getActivePuzzle().getHeight(); i++) {
             if (getActivePuzzle().getCellType(i, c) == CellType.WALL || getActivePuzzle().getCellType(i, c) == CellType.CLUE) {
                 break;
-            } else if (isLamp(i, c)) {
+            } else if (i != r && isLamp(i, c)) {
                 return true;
             }
         }
