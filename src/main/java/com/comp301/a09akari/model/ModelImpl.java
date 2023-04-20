@@ -1,5 +1,6 @@
 package com.comp301.a09akari.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModelImpl implements Model {
@@ -11,6 +12,7 @@ public class ModelImpl implements Model {
         this.library = library;
         index = 0;
         lamps = new boolean[this.library.getPuzzle(index).getWidth()][this.library.getPuzzle(index).getHeight()];
+        observers = new ArrayList<ModelObserver>();
     }
 
     @Override
@@ -247,6 +249,5 @@ public class ModelImpl implements Model {
         for (ModelObserver observer : observers) {
             observer.update(this);
         }
-        // where in this class should i use this method
     }
 }
