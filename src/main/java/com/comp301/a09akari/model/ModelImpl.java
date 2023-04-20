@@ -162,7 +162,6 @@ public class ModelImpl implements Model {
                 lamps[i][j] = false;
             }
         }
-        notifyObservers();
     }
 
     @Override
@@ -197,7 +196,6 @@ public class ModelImpl implements Model {
         if (corridors == corridorsLit && clues == cluesSatisfied && illegalLamps == 0) {
             return true;
         }
-        notifyObservers();
         return false;
     }
 
@@ -242,9 +240,9 @@ public class ModelImpl implements Model {
         }
     }
 
-    private void notifyObservers() {
-        for (ModelObserver observer : observers) {
-            observer.update(this);
-        }
-    }
+//    private void notifyObservers() {
+//        for (ModelObserver observer : observers) {
+//            observer.update(this);
+//        }
+//    }
 }
