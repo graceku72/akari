@@ -134,19 +134,16 @@ public class ModelImpl implements Model {
 
     @Override
     public Puzzle getActivePuzzle() {
-        notifyObservers();
         return library.getPuzzle(index);
     }
 
     @Override
     public int getActivePuzzleIndex() {
-        notifyObservers();
         return index;
     }
 
     @Override
     public void setActivePuzzleIndex(int index) {
-        notifyObservers();
         if (index < 0 || index >= library.size()) {
             throw new IndexOutOfBoundsException();
         }
@@ -155,7 +152,6 @@ public class ModelImpl implements Model {
 
     @Override
     public int getPuzzleLibrarySize() {
-        notifyObservers();
         return library.size();
     }
 
