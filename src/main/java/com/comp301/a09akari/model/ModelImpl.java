@@ -90,7 +90,6 @@ public class ModelImpl implements Model {
         if (getActivePuzzle().getCellType(r, c) != CellType.CORRIDOR) {
             throw new IllegalArgumentException();
         }
-        notifyObservers();
         return lamps[r][c];
     }
 
@@ -130,7 +129,6 @@ public class ModelImpl implements Model {
                 return true;
             }
         }
-        notifyObservers();
         return false;
     }
 
