@@ -79,6 +79,7 @@ public class ModelImpl implements Model {
                 }
             }
         }
+        notifyObservers();
         return false;
     }
 
@@ -90,6 +91,7 @@ public class ModelImpl implements Model {
         if (getActivePuzzle().getCellType(r, c) != CellType.CORRIDOR) {
             throw new IllegalArgumentException();
         }
+        notifyObservers();
         return lamps[r][c];
     }
 
@@ -129,21 +131,25 @@ public class ModelImpl implements Model {
                 return true;
             }
         }
+        notifyObservers();
         return false;
     }
 
     @Override
     public Puzzle getActivePuzzle() {
+        notifyObservers();
         return library.getPuzzle(index);
     }
 
     @Override
     public int getActivePuzzleIndex() {
+        notifyObservers();
         return index;
     }
 
     @Override
     public void setActivePuzzleIndex(int index) {
+        notifyObservers();
         if (index < 0 || index >= library.size()) {
             throw new IndexOutOfBoundsException();
         }
@@ -152,6 +158,7 @@ public class ModelImpl implements Model {
 
     @Override
     public int getPuzzleLibrarySize() {
+        notifyObservers();
         return library.size();
     }
 
@@ -243,5 +250,6 @@ public class ModelImpl implements Model {
         for (ModelObserver observer : observers) {
             observer.update(this);
         }
+        // where in this class should i use this method
     }
 }
