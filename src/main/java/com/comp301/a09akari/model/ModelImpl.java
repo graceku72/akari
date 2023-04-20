@@ -22,6 +22,7 @@ public class ModelImpl implements Model {
             throw new IllegalArgumentException();
         }
         lamps[r][c] = true;
+        notifyObservers();
     }
 
     @Override
@@ -33,6 +34,7 @@ public class ModelImpl implements Model {
             throw new IllegalArgumentException();
         }
         lamps[r][c] = false;
+        notifyObservers();
     }
 
     @Override
@@ -148,6 +150,7 @@ public class ModelImpl implements Model {
             throw new IndexOutOfBoundsException();
         }
         this.index = index;
+        notifyObservers();
     }
 
     @Override
@@ -162,6 +165,7 @@ public class ModelImpl implements Model {
                 lamps[i][j] = false;
             }
         }
+        notifyObservers();
     }
 
     @Override
