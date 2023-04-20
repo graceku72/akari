@@ -79,7 +79,6 @@ public class ModelImpl implements Model {
                 }
             }
         }
-        notifyObservers();
         return false;
     }
 
