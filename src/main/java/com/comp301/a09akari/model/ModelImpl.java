@@ -22,7 +22,7 @@ public class ModelImpl implements Model {
             throw new IllegalArgumentException();
         }
         lamps[r][c] = true;
-        //notifyObservers();
+        notifyObservers();
     }
 
     @Override
@@ -34,7 +34,7 @@ public class ModelImpl implements Model {
             throw new IllegalArgumentException();
         }
         lamps[r][c] = false;
-        //notifyObservers();
+        notifyObservers();
     }
 
     @Override
@@ -164,7 +164,7 @@ public class ModelImpl implements Model {
                 lamps[i][j] = false;
             }
         }
-        //notifyObservers();
+        notifyObservers();
     }
 
     @Override
@@ -179,6 +179,11 @@ public class ModelImpl implements Model {
             for (int j = 0; j < getActivePuzzle().getWidth(); j++) {
                 if (getActivePuzzle().getCellType(i, j) == CellType.CORRIDOR) {
                     corridors++;
+                    if (isLamp(i, j)) {
+                        if (isLampIllegal(i, j)) {
+                            illegalLamps++;
+                        }
+                    }
                     if (isLit(i, j)) {
                         corridorsLit++;
                     }
@@ -189,17 +194,12 @@ public class ModelImpl implements Model {
                         cluesSatisfied++;
                     }
                 }
-                if (isLamp(i, j)) {
-                    if (isLampIllegal(i, j)) {
-                        illegalLamps++;
-                    }
-                }
             }
         }
         if (corridors == corridorsLit && clues == cluesSatisfied && illegalLamps == 0) {
             return true;
         }
-        //notifyObservers();
+        notifyObservers();
         return false;
     }
 
