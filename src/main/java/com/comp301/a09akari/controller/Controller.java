@@ -15,19 +15,18 @@ public class Controller implements ClassicMvcController {
     @Override
     public void clickNextPuzzle() {
         model.setActivePuzzleIndex(model.getActivePuzzleIndex() + 1);
-        // what else do i need to do
     }
 
     @Override
     public void clickPrevPuzzle() {
         model.setActivePuzzleIndex(model.getActivePuzzleIndex() - 1);
-        // what else do i need to do
     }
 
     @Override
     public void clickRandPuzzle() {
         // import random class or smth? look up?
         // use rand on int to choose random index?
+        // since u can impl controller as seen fit, is this part even needed?
     }
 
     @Override
@@ -42,6 +41,5 @@ public class Controller implements ClassicMvcController {
         } else {
             model.addLamp(r, c);
         }
-        // not sure what to do here ?
     }
 }

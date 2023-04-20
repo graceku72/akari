@@ -1,5 +1,6 @@
 package com.comp301.a09akari.view;
 
+import com.comp301.a09akari.controller.ClassicMvcController;
 import com.comp301.a09akari.controller.Controller;
 import com.comp301.a09akari.model.*;
 import javafx.application.Application;
@@ -25,14 +26,14 @@ public class AppLauncher extends Application {
     library.addPuzzle(puzzle_04);
     Puzzle puzzle_05 = new PuzzleImpl(PUZZLE_05);
     library.addPuzzle(puzzle_05);
+
     Model model = new ModelImpl(library);
-    Controller controller = new Controller(model);
+    ClassicMvcController controller = new Controller(model);
 
-    StackPane pane = new StackPane();
-    PuzzleView puzzleView = new PuzzleView(controller);
+    MainView view = new MainView(model, controller);
 
-    Scene scene = new Scene(pane, 300, 250);
-    stage.setScene(scene);
+    stage.setScene(view.getScene());
+    stage.setTitle("Akari");
     stage.show();
   }
 }
