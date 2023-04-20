@@ -5,7 +5,11 @@ import com.comp301.a09akari.model.Model;
 public class Controller implements ClassicMvcController {
     private Model model;
     public Controller(Model model) {
-        this.model = model;
+        if (model != null) {
+            this.model = model;
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
