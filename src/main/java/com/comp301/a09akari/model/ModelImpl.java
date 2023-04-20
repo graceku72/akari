@@ -169,6 +169,7 @@ public class ModelImpl implements Model {
 
     @Override
     public boolean isSolved() {
+        // WORK ON
         int corridors = 0;
         int corridorsLit = 0;
         int clues = 0;
@@ -181,14 +182,17 @@ public class ModelImpl implements Model {
                     if (isLit(i, j)) {
                         corridorsLit++;
                     }
-                } else if (getActivePuzzle().getCellType(i, j) == CellType.CLUE) {
+                }
+                if (getActivePuzzle().getCellType(i, j) == CellType.CLUE) {
                     clues++;
                     if (isClueSatisfied(i, j)) {
                         cluesSatisfied++;
                     }
                 }
-                if (isLampIllegal(i, j)) {
-                    illegalLamps++;
+                if (isLamp(i, j)) {
+                    if (isLampIllegal(i, j)) {
+                        illegalLamps++;
+                    }
                 }
             }
         }
