@@ -100,44 +100,42 @@ public class ModelImpl implements Model {
         if (r < 0 || r >= getActivePuzzle().getHeight() || c < 0 || c >= getActivePuzzle().getWidth()) {
             throw new IndexOutOfBoundsException();
         }
-        if (getActivePuzzle().getCellType(r, c) != CellType.CORRIDOR) {
+        if (!isLamp(r, c)) {
             throw new IllegalArgumentException();
         }
-        if (isLamp(r, c)) {
-            for (int i = c; i >= 0; i--) {
-                if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
-                    break;
-                } else if (getActivePuzzle().getCellType(r, i) == CellType.CORRIDOR) {
-                    if (isLamp(r, i)) {
-                        return true;
-                    }
+        for (int i = c; i >= 0; i--) {
+            if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
+                break;
+            } else if (getActivePuzzle().getCellType(r, i) == CellType.CORRIDOR) {
+                if (isLamp(r, i)) {
+                    return true;
                 }
             }
-            for (int i = c; i < getActivePuzzle().getWidth(); i++) {
-                if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
-                    break;
-                } else if (getActivePuzzle().getCellType(r, i) == CellType.CORRIDOR) {
-                    if (isLamp(r, i)) {
-                        return true;
-                    }
+        }
+        for (int i = c; i < getActivePuzzle().getWidth(); i++) {
+            if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
+                break;
+            } else if (getActivePuzzle().getCellType(r, i) == CellType.CORRIDOR) {
+                if (isLamp(r, i)) {
+                    return true;
                 }
             }
-            for (int i = r; i >= 0; i--) {
-                if (getActivePuzzle().getCellType(i, c) == CellType.WALL || getActivePuzzle().getCellType(i, c) == CellType.CLUE) {
-                    break;
-                } else if (getActivePuzzle().getCellType(i, c) == CellType.CORRIDOR) {
-                    if (isLamp(i, c)) {
-                        return true;
-                    }
+        }
+        for (int i = r; i >= 0; i--) {
+            if (getActivePuzzle().getCellType(i, c) == CellType.WALL || getActivePuzzle().getCellType(i, c) == CellType.CLUE) {
+                break;
+            } else if (getActivePuzzle().getCellType(i, c) == CellType.CORRIDOR) {
+                if (isLamp(i, c)) {
+                    return true;
                 }
             }
-            for (int i = r; i < getActivePuzzle().getHeight(); i++) {
-                if (getActivePuzzle().getCellType(i, c) == CellType.WALL || getActivePuzzle().getCellType(i, c) == CellType.CLUE) {
-                    break;
-                } else if (getActivePuzzle().getCellType(i, c) == CellType.CORRIDOR) {
-                    if (isLamp(i, c)) {
-                        return true;
-                    }
+        }
+        for (int i = r; i < getActivePuzzle().getHeight(); i++) {
+            if (getActivePuzzle().getCellType(i, c) == CellType.WALL || getActivePuzzle().getCellType(i, c) == CellType.CLUE) {
+                break;
+            } else if (getActivePuzzle().getCellType(i, c) == CellType.CORRIDOR) {
+                if (isLamp(i, c)) {
+                    return true;
                 }
             }
         }
