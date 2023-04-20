@@ -100,6 +100,9 @@ public class ModelImpl implements Model {
         if (r < 0 || r >= getActivePuzzle().getHeight() || c < 0 || c >= getActivePuzzle().getWidth()) {
             throw new IndexOutOfBoundsException();
         }
+        if (getActivePuzzle().getCellType(r, c) != CellType.CORRIDOR) {
+            throw new IllegalArgumentException();
+        }
         if (isLamp(r, c)) {
             for (int i = c; i >= 0; i--) {
                 if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
