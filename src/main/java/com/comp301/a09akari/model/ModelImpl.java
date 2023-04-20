@@ -106,37 +106,29 @@ public class ModelImpl implements Model {
         for (int i = c; i >= 0; i--) {
             if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
                 break;
-            } else if (getActivePuzzle().getCellType(r, i) == CellType.CORRIDOR) {
-                if (isLamp(r, i)) {
-                    return true;
-                }
+            } else if (isLamp(r, i)) {
+                return true;
             }
         }
         for (int i = c; i < getActivePuzzle().getWidth(); i++) {
             if (getActivePuzzle().getCellType(r, i) == CellType.WALL || getActivePuzzle().getCellType(r, i) == CellType.CLUE) {
                 break;
-            } else if (getActivePuzzle().getCellType(r, i) == CellType.CORRIDOR) {
-                if (isLamp(r, i)) {
-                    return true;
-                }
+            } else if (isLamp(r, i)) {
+                return true;
             }
         }
         for (int i = r; i >= 0; i--) {
             if (getActivePuzzle().getCellType(i, c) == CellType.WALL || getActivePuzzle().getCellType(i, c) == CellType.CLUE) {
                 break;
-            } else if (getActivePuzzle().getCellType(i, c) == CellType.CORRIDOR) {
-                if (isLamp(i, c)) {
-                    return true;
-                }
+            } else if (isLamp(i, c)) {
+                return true;
             }
         }
         for (int i = r; i < getActivePuzzle().getHeight(); i++) {
             if (getActivePuzzle().getCellType(i, c) == CellType.WALL || getActivePuzzle().getCellType(i, c) == CellType.CLUE) {
                 break;
-            } else if (getActivePuzzle().getCellType(i, c) == CellType.CORRIDOR) {
-                if (isLamp(i, c)) {
-                    return true;
-                }
+            } else if (isLamp(i, c)) {
+                return true;
             }
         }
         return false;
