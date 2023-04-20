@@ -159,8 +159,8 @@ public class ModelImpl implements Model {
 
     @Override
     public void resetPuzzle() {
-        for (int i = 0; i < getActivePuzzle().getHeight(); i++) {
-            for (int j = 0; j < getActivePuzzle().getWidth(); j++) {
+        for (int i = 0; i < lamps[0].length; i++) {
+            for (int j = 0; j < lamps.length; j++) {
                 lamps[i][j] = false;
             }
         }
@@ -169,27 +169,59 @@ public class ModelImpl implements Model {
 
     @Override
     public boolean isSolved() {
-        // get a count on # corridors to see that theyre all lit & make int var
-        // get a count on # clues to see that theyre all solved & make int var
-//        for (int i = 0; i < getActivePuzzle().getHeight(); i++) {
-//            for (int j = 0; j < getActivePuzzle().getWidth(); j++) {
-//                if ((lamps[i][j] == 1 || lamps[i][j] == 2) && !isLampIllegal(i, j)) {
-//
-//                }
-//            }
-//        }
+        int corridors = 0;
+        int corridorsLit = 0;
+        int clues = 0;
+        int cluesSatisfied = 0;
+        int illegalLamps = 0;
+        for (int i = 0; i < getActivePuzzle().getHeight(); i++) {
+            for (int j = 0; j < getActivePuzzle().getWidth(); j++) {
+                if (getActivePuzzle().getCellType(i, j) == CellType.CORRIDOR) {
+                    corridors++;
+                    if (isLit(i, j)) {
+                        corridorsLit++;
+                    }
+                } else if (getActivePuzzle().getCellType(i, j) == CellType.CLUE) {
+                    clues++;
+                    if (isClueSatisfied(i, j)) {
+                        cluesSatisfied++;
+                    }
+                }
+                if (isLampIllegal(i, j)) {
+                    illegalLamps++;
+                }
+            }
+        }
+        if (corridors == corridorsLit && clues == cluesSatisfied && illegalLamps == 0) {
+            return true;
+        }
         //notifyObservers();
         return false;
     }
 
     @Override
     public boolean isClueSatisfied(int r, int c) {
-        // start on
         if (r < 0 || r >= getActivePuzzle().getHeight() || c < 0 || c >= getActivePuzzle().getWidth()) {
             throw new IndexOutOfBoundsException();
         }
-        if (getActivePuzzle().getCellType(r, c) != CellType.CORRIDOR) {
+        if (getActivePuzzle().getCellType(r, c) != CellType.CLUE) {
             throw new IllegalArgumentException();
+        }
+        int count = 0;
+        if (c - 1 >= 0 && isLamp(r, c - 1)) {
+            count++;
+        }
+        if (c + 1 < getActivePuzzle().getWidth() && isLamp(r, c + 1)) {
+            count++;
+        }
+        if (r - 1 >= 0 && isLamp(r - 1, c)) {
+            count++;
+        }
+        if (r + 1 < getActivePuzzle().getHeight() && isLamp(r + 1, c)) {
+            count++;
+        }
+        if (count == getActivePuzzle().getClue(r, c)) {
+            return true;
         }
         return false;
     }
