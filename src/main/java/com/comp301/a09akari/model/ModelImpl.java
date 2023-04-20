@@ -22,7 +22,7 @@ public class ModelImpl implements Model {
             throw new IllegalArgumentException();
         }
         lamps[r][c] = true;
-        notifyObservers();
+        //notifyObservers();
     }
 
     @Override
@@ -34,7 +34,7 @@ public class ModelImpl implements Model {
             throw new IllegalArgumentException();
         }
         lamps[r][c] = false;
-        notifyObservers();
+        //notifyObservers();
     }
 
     @Override
@@ -171,7 +171,7 @@ public class ModelImpl implements Model {
                 lamps[i][j] = false;
             }
         }
-        notifyObservers();
+        //notifyObservers();
     }
 
     @Override
@@ -185,7 +185,7 @@ public class ModelImpl implements Model {
 //                }
 //            }
 //        }
-        notifyObservers();
+        //notifyObservers();
         return false;
     }
 
