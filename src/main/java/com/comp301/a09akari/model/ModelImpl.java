@@ -166,7 +166,6 @@ public class ModelImpl implements Model {
 
     @Override
     public boolean isSolved() {
-        // WORK ON
         int corridors = 0;
         int corridorsLit = 0;
         int clues = 0;
@@ -240,9 +239,9 @@ public class ModelImpl implements Model {
         }
     }
 
-//    private void notifyObservers() {
-//        for (ModelObserver observer : observers) {
-//            observer.update(this);
-//        }
-//    }
+    private void notifyObservers() {
+        for (ModelObserver observer : observers) {
+            observer.update(this);
+        }
+    }
 }
