@@ -22,7 +22,6 @@ public class ModelImpl implements Model {
             throw new IllegalArgumentException();
         }
         lamps[r][c] = true;
-        notifyObservers();
     }
 
     @Override
@@ -34,7 +33,6 @@ public class ModelImpl implements Model {
             throw new IllegalArgumentException();
         }
         lamps[r][c] = false;
-        notifyObservers();
     }
 
     @Override
