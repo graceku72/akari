@@ -4,6 +4,7 @@ import com.comp301.a09akari.controller.ClassicMvcController;
 import com.comp301.a09akari.controller.Controller;
 import com.comp301.a09akari.model.Model;
 import com.comp301.a09akari.model.ModelObserver;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -18,7 +19,7 @@ public class MainView implements FXComponent, ModelObserver {
         PuzzleView = new PuzzleView(model, controller);
         ControlView = new ControlView(model, controller);
         MessageView = new MessageView(model, controller);
-        scene = new Scene(render());
+        scene = new Scene(render(), 600, 600);
         scene.getStylesheets().add("main.css");
         model.addObserver(this);
     }
@@ -35,9 +36,9 @@ public class MainView implements FXComponent, ModelObserver {
     @Override
     public Parent render() {
         BorderPane pane = new BorderPane();
-        pane.setTop(PuzzleView.render());
+        pane.setCenter(PuzzleView.render());
         pane.setBottom(ControlView.render());
-        pane.setBottom(MessageView.render());
+        pane.setTop(MessageView.render());
         return pane;
     }
 }

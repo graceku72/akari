@@ -29,24 +29,29 @@ public class ControlView implements FXComponent, ModelObserver {
         HBox pane = new HBox();
         pane.getChildren().clear();
         pane.setAlignment(Pos.CENTER);
+        pane.setSpacing(10);
 
         if (nextButton == null) {
             nextButton = new Button("Next");
             nextButton.setOnAction((ActionEvent event) -> controller.clickNextPuzzle());
         }
         pane.getChildren().add(nextButton);
+        // skips even numbered puzzles (not 0 indexed)
 
         if (prevButton == null) {
             prevButton = new Button("Previous");
             prevButton.setOnAction((ActionEvent event) -> controller.clickPrevPuzzle());
         }
         pane.getChildren().add(prevButton);
+        // skips even numbered puzzles (not 0 indexed)
 
         if (randButton == null) {
             randButton = new Button("Select Random");
             randButton.setOnAction((ActionEvent event) -> controller.clickRandPuzzle());
         }
         pane.getChildren().add(randButton);
+        // skips even numbered puzzles (not 0 indexed)
+        // sometimes doesnt work
 
         if (resetButton == null) {
             resetButton = new Button("Reset");
@@ -54,13 +59,10 @@ public class ControlView implements FXComponent, ModelObserver {
         }
         pane.getChildren().add(resetButton);
 
-        // include clickCell() control here or in PuzzleView?
-
         return pane;
     }
 
     @Override
     public void update(Model model) {
-        // dont need this
     }
 }

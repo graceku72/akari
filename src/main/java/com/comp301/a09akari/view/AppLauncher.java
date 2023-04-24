@@ -35,5 +35,10 @@ public class AppLauncher extends Application {
     stage.setScene(view.getScene());
     stage.setTitle("Akari");
     stage.show();
+
+    //You may optionally submit a demo video (up to 5 min) walking
+    // through your application on your own device
+    //can package your program into a JAR file that can be distributed and run on different computers
+    // mayb do this for Mac?
   }
 }

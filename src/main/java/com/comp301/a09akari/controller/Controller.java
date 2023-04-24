@@ -14,19 +14,31 @@ public class Controller implements ClassicMvcController {
 
     @Override
     public void clickNextPuzzle() {
-        model.setActivePuzzleIndex(model.getActivePuzzleIndex() + 1);
+        if (model.getActivePuzzleIndex() + 1 < model.getPuzzleLibrarySize()) {
+            model.setActivePuzzleIndex(model.getActivePuzzleIndex() + 1);
+            model.resetPuzzle();
+        }
     }
 
     @Override
     public void clickPrevPuzzle() {
-        model.setActivePuzzleIndex(model.getActivePuzzleIndex() - 1);
+        if (model.getActivePuzzleIndex() - 1 >= 0) {
+            model.setActivePuzzleIndex(model.getActivePuzzleIndex() - 1);
+            model.resetPuzzle();
+        }
     }
 
     @Override
     public void clickRandPuzzle() {
-        // import random class or smth? look up?
-        // use rand on int to choose random index?
-        // since u can impl controller as seen fit, is this part even needed?
+        int indexInt = 0;
+        double index = model.getPuzzleLibrarySize() * Math.random();
+        indexInt = (int) index;
+        while (indexInt == model.getActivePuzzleIndex()) {
+            index = model.getPuzzleLibrarySize() * Math.random();
+            indexInt = (int) index;
+        }
+        model.setActivePuzzleIndex(indexInt);
+        model.resetPuzzle();
     }
 
     @Override
