@@ -48,6 +48,7 @@ public class SamplePuzzles {
   };
 
   // Note: "Normal" 10x10 Puzzle ID 6424638 from https://www.puzzle-light-up.com/specific.php
+  // puzzle 4 here doesnt match up w whats shown in link
   public static int[][] PUZZLE_04 = {
     {6, 1, 6, 6, 6, 6, 5, 6, 6, 6},
     {6, 6, 6, 6, 6, 6, 6, 6, 6, 5},

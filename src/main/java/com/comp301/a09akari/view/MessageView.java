@@ -31,7 +31,7 @@ public class MessageView implements FXComponent, ModelObserver {
         pane.getChildren().add(curr);
 
         if (model.isSolved()) {
-            Label success = new Label("Success!");
+            Label success = new Label("Solved!");
             pane.getChildren().add(success);
         } else {
             Label notSuccess = new Label();

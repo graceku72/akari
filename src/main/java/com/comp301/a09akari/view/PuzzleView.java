@@ -32,21 +32,16 @@ public class PuzzleView implements FXComponent, ModelObserver {
     public Parent render() {
         GridPane grid = new GridPane();
         grid.getChildren().clear();
-        grid.setHgap(8);
-        grid.setVgap(8);
+        grid.setHgap(5);
+        grid.setVgap(5);
         grid.setAlignment(Pos.CENTER);
-
-    // Board sizes will differ across puzzles, and computer screen sizes will different across users
-    // – the entire board (and all other components) should be visible, without having to resize the
-    // application window between puzzle changes.
-    // See the “ULA Grading Procedures” for more information
 
         for (int r = 0; r < model.getActivePuzzle().getHeight(); r++) {
             for (int c = 0; c < model.getActivePuzzle().getWidth(); c++) {
                 StackPane cell = new StackPane();
                 Rectangle pane = new Rectangle();
-                pane.setWidth(50);
-                pane.setHeight(50);
+                pane.setWidth(35);
+                pane.setHeight(35);
                 pane.setFill(Color.WHITE);
                 pane.setStroke(Color.BLACK);
                 cell.getChildren().add(pane);
@@ -64,12 +59,15 @@ public class PuzzleView implements FXComponent, ModelObserver {
                             Image image = new Image("light-bulb.png");
                             ImageView lamp = new ImageView();
                             lamp.setImage(image);
-                            lamp.setFitWidth(40);
+                            lamp.setFitWidth(25);
                             lamp.setPreserveRatio(true);
                             cell.getChildren().add(lamp);
                         }
                         if (model.isLit(r, c)) {
                             pane.setFill(Color.YELLOW);
+                            if (model.isLamp(r, c) && model.isLampIllegal(r, c)) {
+                                pane.setFill(Color.RED);
+                            }
                         }
                         break;
                     case CLUE:
