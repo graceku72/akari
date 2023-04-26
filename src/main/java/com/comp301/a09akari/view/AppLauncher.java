@@ -31,17 +31,9 @@ public class AppLauncher extends Application {
     ClassicMvcController controller = new Controller(model);
 
     MainView view = new MainView(model, controller);
-    //pass stage into mainview
-    // model calls notifyobservers
-    // update method called
-    // can resize scene in update method & add it to stage
-    // call setscene
 
     stage.setScene(view.getScene());
     stage.setTitle("Akari");
     stage.show();
-
-    //You may optionally submit a demo video (up to 5 min) walking
-    // through your application on your own device
   }
 }
