@@ -5,9 +5,9 @@ import java.util.List;
 
 public class ModelImpl implements Model {
   private final PuzzleLibrary library;
+  private final List<ModelObserver> observers;
   private int index = 0;
   private boolean[][] lamps;
-  private final List<ModelObserver> observers;
   private Puzzle activePuzzle;
 
   public ModelImpl(PuzzleLibrary library) {
@@ -209,7 +209,7 @@ public class ModelImpl implements Model {
         }
       }
     }
-      return corridors == corridorsLit && clues == cluesSatisfied && illegalLamps == 0;
+    return corridors == corridorsLit && clues == cluesSatisfied && illegalLamps == 0;
   }
 
   @Override
@@ -237,7 +237,7 @@ public class ModelImpl implements Model {
         && isLamp(r + 1, c)) {
       count++;
     }
-      return count == activePuzzle.getClue(r, c);
+    return count == activePuzzle.getClue(r, c);
   }
 
   @Override
